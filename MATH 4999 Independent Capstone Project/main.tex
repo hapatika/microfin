@@ -1,0 +1,81 @@
+
+\documentclass[12pt,a4paper]{cibb}
+
+\usepackage{subfigure,graphicx}
+\usepackage{amsmath,amsfonts,latexsym,amssymb,euscript,xr}
+\usepackage{booktabs}
+\usepackage[nodayofweek]{datetime}
+\usepackage{hyperref}
+
+\usepackage[table]{xcolor}
+\usepackage{color,colortbl,tabularx}
+
+\usepackage[english]{babel}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{amsmath,amsfonts,amsthm}
+% \usepackage[pdftex]{graphicx}
+\usepackage{ragged2e}
+\usepackage{pifont}
+\usepackage{multicol}
+
+\newcommand{\euler}{e}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{problem}{Problem}
+\newtheorem{definition}{Definition}
+
+
+\def\red{\color{red}}
+\def\black{\color{black}}
+\def\blue{\color{blue}}
+\def\magenta{\color{magenta}}
+
+\definecolor{LightBlue}{rgb}{0.88,0.9,0.9}
+
+
+\title{\Large $\ $\\ \bf Capstone Report}
+
+\author{\large Amadika Mahapatra}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\raggedright
+
+\section{\bf Academic foundations and theoretical background}
+\subsection{Probability theory}
+
+\subsection{Martingales and measure theory}
+
+\subsection{Stochastic processes and Itô calculus}
+A stochastic process $\{\cdots, X_{t-1}, X_{t}, X_{t+1}, \cdots  \}$ is a process/series of random variables indexed by time $t$.. Then, the  stochastic behaviour of $\{X_t\}$ is determined by the probability density/mass functions (pdf's) $p(x_{t_1}, x_{t_2}, \cdots, x_{t_k}) $ for all finite collections of time indexes, $\{t_i: i \in \{1, ..., m \}, m < \infty \}$
+
+\subsection{Statistical methods}
+\subsubsection{Regression Analysis}
+
+\subsubsection{Time series analysis}
+
+\subsubsection{Volatility Modelling}
+
+\section{Application in projects}
+\subsection{Comparison of GARCH over various asset classes, FIGARCH}
+
+
+\subsection{Portfolio Optimizaiton}
+\subsubsection{Mean-variance portfolio optimization}
+Markowitz's seminal 1952 paper on Mean-Variance Optimization has long been the modus operandi of portfolio optimization. This framework results in a quadratic programming problem that relies on the first and second moments of the portfolio returns. There are many difficulties surrounding this 
+
+\sigma_{t}^{\lambda}=\omega
+        + \sum_{i=1}^{p}\alpha_{i}\left|\epsilon_{t-i}\right|^{\lambda}
+        +\sum_{j=1}^{o}\gamma_{j}\left|\epsilon_{t-j}\right|^{\lambda}
+        I\left[\epsilon_{t-j}<0\right]+\sum_{k=1}^{q}\beta_{k}\sigma_{t-k}^{\lambda}
+
+\footnotesize
+\bibliographystyle{unsrt}
+\bibliography{bibliography_CIBB_file.bib} 
+\normalsize
+
+\end{document}
