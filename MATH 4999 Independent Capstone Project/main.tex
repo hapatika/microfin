@@ -17,6 +17,9 @@
 \usepackage{ragged2e}
 \usepackage{pifont}
 \usepackage{multicol}
+\usepackage{times}
+\RequirePackage{titlesec}
+
 
 \newcommand{\euler}{e}
 \newtheorem{theorem}{Theorem}[section]
@@ -46,32 +49,92 @@
 \raggedright
 
 \section{\bf Academic foundations and theoretical background}
-\subsection{Probability theory}
+\subsection{\textbf{Probability theory}}
 
-\subsection{Martingales and measure theory}
-
-\subsection{Stochastic processes and Itô calculus}
+\subsection{\textbf{Stochastic processes and Itô calculus}}
 A stochastic process $\{\cdots, X_{t-1}, X_{t}, X_{t+1}, \cdots  \}$ is a process/series of random variables indexed by time $t$.. Then, the  stochastic behaviour of $\{X_t\}$ is determined by the probability density/mass functions (pdf's) $p(x_{t_1}, x_{t_2}, \cdots, x_{t_k}) $ for all finite collections of time indexes, $\{t_i: i \in \{1, ..., m \}, m < \infty \}$
 
-\subsection{Statistical methods}
-\subsubsection{Regression Analysis}
-
-\subsubsection{Time series analysis}
-
-\subsubsection{Volatility Modelling}
-
-\section{Application in projects}
-\subsection{Comparison of GARCH over various asset classes, FIGARCH}
+Geometric Brownian Motion 
 
 
-\subsection{Portfolio Optimizaiton}
-\subsubsection{Mean-variance portfolio optimization}
-Markowitz's seminal 1952 paper on Mean-Variance Optimization has long been the modus operandi of portfolio optimization. This framework results in a quadratic programming problem that relies on the first and second moments of the portfolio returns. There are many difficulties surrounding this 
+\subsection{\textbf{Statistical methods}}
+\subsubsection{Regression analysis}
+We consider run-time optimizations that may be made to the computation of the hat matrix in the context of OLS. In particular, we compare implementations using Python's numba library with parallel computation enabled.
 
-\sigma_{t}^{\lambda}=\omega
+\paragraph{\textbf{Lasso regression}}
+
+\paragraph{Alternating direction method of multipliers (ADMM)}
+
+\subsubsection{\textbf{Time series analysis}}
+The goal of time series analysis is to describe the probabilistic structure of the stochastic process $\{X_t\}$ by statistical methods. We do this by fitting various models to the moment functions of these random variables. The conditional moments of the time series are analogous to the conditional moments of the martingale based on the information measure.
+The autocorrelation function (ACF) of a time series is defined as \[\rho(s,t) = \text{Corr}(X
+_s, X_t) = \frac{\text{Cov}(X_s, X_t)}{\sqrt{\text{Var}(X_s)\text{Var}(X_t)}}= \frac{\text{E}[(X_s - \mu_s)(X_t - \mu_t)]}{\sqrt{\text{Var}(X_s)\text{Var}(X_t)}}  \]
+We also consider the partial autocorrelation function (PACF) which allows us to only consider the direct effects of the lagged variables. This allows us to get a pure regression on the underlying variables. 
+
+\begin{definition}
+   \textbf{Stationarity} Strict stationarity means that the joint distribution of the k-lagged n random variables in a stochastic process are the same. We stick to weak stationarity, defining it on the basis of equivalence of moments.  
+\end{definition}
+
+\begin{theorem}
+    \textbf{Wold Representation Theorem} Any zero-mean covariance stationary time series $\{X_t\}$ can be decomposed as $X_t = V_t + S_t$ where 
+    \begin{itemize}
+        \itemsep 1px
+        \item $\{V_t\}$ is a linear combination of past values of $V_t$ with constant coefficients.
+        \item $S_t$ is an infinite moving average process. $S_t = \sum_{i=0}^\infty \psi_i \eta_{t-i}$, where $\psi_0 = 1;  \sum_{i=0}^\infty \psi_i^2 < \infty $
+        \item $\{\eta_t\}$ is linearly unpredictable white noise.
+    \end{itemize}
+\end{theorem}
+We note here that we can use OLS to determine $X_t$ as an auto-regression on the past p values of $(X_{t-1}, X_{t-2}, \cdots, X_{t-p})$. The resulting residuals $\{\hat\epsilon_t\}$ can be used to specify $\epsilon_t = \sum_{i=0}^\infty \eta_{t-i}\psi_i$. This is tested by the requirement that $\{\epsilon_t\}$ is orthogonal to the AR process.  
+\begin{definition}
+        \textbf{Impulse response function} of a covariance stationary process $\{X_t\}$ is \[IR(j) = \frac{\partial{X_t}}{\partial{\eta_{t-j}}} = \psi_j\]
+\end{definition}
+
+\paragraph{\textbf{AR process}} For an auto-regressive process of order p, we consider the PACF to determine the order of the process.  
+
+\paragraph{\textbf{MA process}}
+
+The Box-Jenkins method advocates the removal of non-stationary trending behaviour using differencing operators, i.e. \[\Delta^k= (1 - L)^k, \text{ where L is the lag operator for a time series}\] 
+
+\subsubsection{Volatility modelling}
+
+\[\sigma_{t}^{\lambda}=\omega
         + \sum_{i=1}^{p}\alpha_{i}\left|\epsilon_{t-i}\right|^{\lambda}
         +\sum_{j=1}^{o}\gamma_{j}\left|\epsilon_{t-j}\right|^{\lambda}
-        I\left[\epsilon_{t-j}<0\right]+\sum_{k=1}^{q}\beta_{k}\sigma_{t-k}^{\lambda}
+        I\left[\epsilon_{t-j}<0\right]+\sum_{k=1}^{q}\beta_{k}\sigma_{t-k}^{\lambda}\]
+
+\subsubsection{Parameter estimation}
+\paragraph{\textbf{Maximum Likelihood Estimation}}
+\paragraph{EM algorithm }
+
+\section{Projects}
+\subsection{\textbf{Comparison of GARCH over various asset classes}}
+We consider here how popular models of time series analysis. In February 2025, the Trump administration announced a series of tarrifs in America that caused a period of very high volatility in the financial markets worldwide. We want to use ARIMA and GARCH models in conjunction to see how the model fares in these volatile market conditions. As a corollary, we also investigate the relationship to how VIX is calculated, and the relation of the GARCH model to the construction of volatility surfaces, used for derivative pricing. For the second corollary, we mention the FIGARCH model and discuss the advantages and disadvantages. \\
+The asset classes we compare performance across are: 
+\begin{itemize} 
+    \itemsep 1px
+    \item Index ETFs
+    \item Long stock portfolios
+    \item Gold
+    \item US Treasuries
+    \item Brent Crude Oil 
+\end{itemize}
+
+Process:   \\ 
+\begin{enumerate}
+    \item Get time series data. We use the adjusted close prices of each asset in our data. We fit an ARIMA model to our training set, which includes the high growth period post COVID. We consider this time frame as the model can fit to the high volatility period of COVID.
+    \item The research question when fititng the ARIMA(p,d,q) model to the conditional mean of the time series. 
+    
+\end{enumerate}
+
+\subsection{Portfolio Optimization}
+In this section, we describe two ways to optimize portfolio allocation and reducing the universe of stocks to identify cointegration/correlation. For both these, we use the method of alternating direction method of multipliers (ADMM) to 
+\subsubsection{Mean-variance portfolio optimization}
+Markowitz's seminal 1952 paper on Mean-Variance Optimization results in a quadratic programming problem that relies on the first and second moments of the portfolio returns. For non-Gaussian portfolio returns the quadratic programming problem can quickly become intractable. 
+
+
+
+\subsubsection{Graph based understanding of correlations}
+We consider the universe of stocks represented by a 
 
 \footnotesize
 \bibliographystyle{unsrt}

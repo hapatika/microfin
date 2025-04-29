@@ -8,7 +8,8 @@ def get_data(assets: list, startdate = (dt.datetime.today - dt.timedelta(days=50
   data = yf.download(assets, start = startdate, end=enddate)
   dates = data.index.to_numpy()
   adj_close = data['Close'].to_numpy()
+  cov = data['Close'].corr()
   returns = data['Close'].pct_change()
   log_returns = np.log(1 + returns)
-  return dates, adj_close, returns.to_numpy(), log_returns.to_numpy(), data.to_numpy()
+  return dates, adj_close, returns.to_numpy(), log_returns.to_numpy(), cov.to_numpy(), data.to_numpy()
 

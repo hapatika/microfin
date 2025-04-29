@@ -11,3 +11,16 @@ import matplotlib.pyplot as plt
 class Optimizer:
   def __init__(self):
     pass
+
+class MeanVariance(Optimizer):
+  # Objective is to maximise the first moment - the expectation of the portfolio returns and minimize the second momemnt - the variance. 
+  # Computationally tractable when 
+  def __init__(self):
+    pass
+
+
+class ADMM(Optimizer):
+  pass
+
+class CoordinateDescent(Optimizer):
+  pass
